@@ -16,6 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const successTitle = document.getElementById('successTitle');
     const successMessage = document.getElementById('successMessage');
 
+    // Keep track of last transaction ID to detect new payments
+    let lastTransactionId = 0;
+
     // Fetch user data
     async function fetchUserData() {
         try {
@@ -37,8 +40,28 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (data.userData.photo_url) {
                     profilePic.src = data.userData.photo_url;
                     profilePic.onerror = () => {
-                        profilePic.src = 'https://via.placeholder.com/100';
+                        profilePic.src = 'https://ui-avatars.com/api/?name=' + 
+                            encodeURIComponent(data.userData.username || 'A') + 
+                            '&background=random&color=fff';
                     };
+                }
+
+                // Check for new received payments
+                if (data.userData.transactions && data.userData.transactions.length > 0) {
+                    const latestTransaction = data.userData.transactions[0];
+                    if (latestTransaction.id > lastTransactionId && 
+                        latestTransaction.receiver_id === telegramId &&
+                        latestTransaction.type === 'send') {
+                        // Show notification for new payment
+                        showNotification(
+                            'Payment Received!',
+                            `You received $${parseFloat(latestTransaction.amount).toFixed(2)} from ${latestTransaction.sender_username || 'Anonymous'}`
+                        );
+                        // Play notification sound
+                        const audio = new Audio('data:audio/wav;base64,UklGRl9vT19T');
+                        audio.play().catch(console.error);
+                        lastTransactionId = latestTransaction.id;
+                    }
                 }
 
                 // Update transactions
@@ -50,6 +73,35 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error fetching user data:', error);
             showError('Failed to connect to server');
         }
+    }
+
+    // Show notification
+    function showNotification(title, message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50 flex items-start space-x-3 transform translate-x-full transition-transform duration-300';
+        notification.innerHTML = `
+            <div class="flex-shrink-0">
+                <i class="fas fa-check-circle text-2xl"></i>
+            </div>
+            <div>
+                <h4 class="font-semibold">${title}</h4>
+                <p class="text-sm">${message}</p>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Slide in animation
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
     }
 
     // Show success modal

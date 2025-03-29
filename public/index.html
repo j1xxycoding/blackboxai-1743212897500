@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+    <div class="container max-w-md mx-auto p-8">
+        <div class="bg-gray-800 rounded-xl p-8 shadow-lg">
+            <!-- Telegram Logo -->
+            <div class="flex justify-center mb-6">
+                <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center">
+                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <h1 class="text-2xl font-semibold text-center mb-6">Telegram Login</h1>
+
+            <!-- Login Form -->
+            <div class="space-y-4">
+                <input type="text" 
+                       placeholder="Enter your Telegram ID" 
+                       class="w-full bg-gray-700 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                
+                <button id="sendOTP" 
+                        class="w-full bg-blue-500 hover:bg-blue-600 rounded-lg p-3 transition-colors">
+                    Send OTP
+                </button>
+
+                <input type="text" 
+                       placeholder="Enter OTP" 
+                       class="w-full bg-gray-700 rounded-lg p-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 hidden">
+                
+                <button id="login"
+                        class="w-full bg-blue-500 hover:bg-blue-600 rounded-lg p-3 transition-colors hidden">
+                    Login
+                </button>
+            </div>
+
+            <!-- Instructions -->
+            <div class="mt-8 space-y-2 text-gray-400 text-sm">
+                <p>1. Enter your Telegram ID</p>
+                <p>2. Click "Send OTP" to receive a code</p>
+                <p>3. Enter the OTP received on Telegram</p>
+                <p>4. Click "Login" to access your account</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

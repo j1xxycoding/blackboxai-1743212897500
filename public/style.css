@@ -1,0 +1,173 @@
+:root {
+    --primary-color: #0088cc;
+    --bg-dark: #1a1a1a;
+    --bg-darker: #121212;
+    --text-color: #ffffff;
+    --input-bg: #2a2a2a;
+    --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--bg-darker);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+}
+
+.login-box {
+    background: var(--bg-dark);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+
+.logo-container {
+    margin-bottom: 2rem;
+}
+
+.telegram-logo {
+    font-size: 4rem;
+    color: var(--primary-color);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 1rem;
+    background: var(--input-bg);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 136, 204, 0.1);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #0077b3;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.message {
+    margin: 1rem 0;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.message.error {
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff4444;
+}
+
+.message.success {
+    background: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+}
+
+.instructions {
+    margin-top: 2rem;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.instructions p {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.instructions p::before {
+    content: "•";
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.otp-section {
+    opacity: 0;
+    height: 0;
+    transition: all 0.3s ease;
+}
+
+.otp-section.visible {
+    opacity: 1;
+    height: auto;
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .telegram-logo {
+        font-size: 3rem;
+    }
+}
